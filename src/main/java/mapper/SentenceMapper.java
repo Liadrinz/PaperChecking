@@ -26,6 +26,9 @@ public class SentenceMapper extends Mapper<Object, Text, Text, IntWritable> {
             StringTokenizer tokenizer = new StringTokenizer(sentence);
             while (tokenizer.hasMoreTokens()) {
                 String word = tokenizer.nextToken();
+                word = word.replaceAll("\\W", "");
+                word = word.replaceAll("\\s", "");
+                if (word.length() == 0) continue;
                 keyInfo.set(word + ":" + sentence + ":" + filename);
                 valInfo.set(1);
                 context.write(keyInfo, valInfo);

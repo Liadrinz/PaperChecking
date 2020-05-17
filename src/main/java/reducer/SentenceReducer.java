@@ -3,6 +3,7 @@ package reducer;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
+import org.apache.hadoop.mapreduce.lib.output.MultipleOutputs;
 
 import java.io.IOException;
 
@@ -22,7 +23,7 @@ public class SentenceReducer extends Reducer<Text, IntWritable, Text, Text> {
         }
         String[] wordSentenceFile = key.toString().split(":");
         key.set(wordSentenceFile[0]);
-        valInfo.set(wordSentenceFile[1] + ":" + wordSentenceFile[2] + ":" + sum);
+        valInfo.set(wordSentenceFile[1] + ":" + sum);
         context.write(key, valInfo);
     }
 }
