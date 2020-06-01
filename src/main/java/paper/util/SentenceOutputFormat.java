@@ -1,8 +1,9 @@
-package paper.util;
+package paper.data;
 
 import org.apache.hadoop.mapreduce.RecordWriter;
 import org.apache.hadoop.mapreduce.TaskAttemptContext;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+import paper.util.JedisUtil;
 import redis.clients.jedis.Jedis;
 
 import java.io.IOException;
@@ -30,7 +31,6 @@ public class SentenceOutputFormat<K, V> extends FileOutputFormat<K, V> {
     @Override
     public RecordWriter<K, V> getRecordWriter(TaskAttemptContext taskAttemptContext) throws IOException, InterruptedException {
         Jedis jedis = JedisUtil.getJedis();
-        jedis.flushAll();
         return new RedisRecordWriter<K, V>(jedis);
     }
 }
