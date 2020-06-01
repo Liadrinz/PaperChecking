@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>查重结果可视化</title>
+</head>
+<style>
+    table{
+        border-collapse: collapse;
+    }
+    table,table tr td { 
+        border:1px solid #ccc; 
+    }
+    table tr td{
+        padding: 5px 10px;
+    }
+</style>
+
+<body border="1" cellspacing="0">
+    <div>
+        <table>
+            <tbody>
+                <tr>
+                    <th>相似语句</th>
+                    <th>相似语句所在论文</th>
+                    <th>原语句</th>
+                    <th>相似度</th>
+                </tr>
+                {% for line in data %}
+                <tr>
+                    {% for field in line %}
+                    <td>{{field}}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
